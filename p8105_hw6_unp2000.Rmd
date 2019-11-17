@@ -1,0 +1,9 @@
+---
+title: "p8105_hw6_unp2000"
+author: Uma Palaniappan 
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
