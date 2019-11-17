@@ -6,4 +6,11 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
+
+```{r}
+child_data = read_csv("./data/birthweight.csv") %>%
+janitor::clean_names ()
+```
+
