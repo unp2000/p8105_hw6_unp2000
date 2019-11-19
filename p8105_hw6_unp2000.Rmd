@@ -20,3 +20,9 @@ janitor::clean_names () %>%
       )
 ```
 
+# Regression Model 
+
+```{r}
+bw_model1 = lm(bwt ~ babysex + gaweeks + momage + mheight + parity + ppbmi + pnumlbw + smoken, data = child_data)
+```
+
