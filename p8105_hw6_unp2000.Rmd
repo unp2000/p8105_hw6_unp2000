@@ -22,7 +22,22 @@ janitor::clean_names () %>%
 
 # Regression Model 
 
+Creating Initial Regression Model: 
+
+Variables were selected based on a literature search of predictors of low birthweight. Based on this, babysex, gaweeks, momage, mheight, parity, ppbmi, pnumlbw, and smoken were selected as variables to include in the model. 
+
 ```{r}
 bw_model1 = lm(bwt ~ babysex + gaweeks + momage + mheight + parity + ppbmi + pnumlbw + smoken, data = child_data)
+```
+
+Plotting residuals against fitted values: 
+
+```{r}
+plot_1 = child_data %>%
+  modelr::add_residuals(bw_model1) %>%
+  modelr::add_predictions(bw_model1) %>%
+  ggplot(aes(x = pred, y = resid)) + geom_point (color = "blue") 
+
+plot_1
 ```
 
