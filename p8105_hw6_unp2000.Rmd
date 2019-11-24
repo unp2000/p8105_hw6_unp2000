@@ -158,3 +158,14 @@ plot_1 =
 plot_1
 ```
 
+Based on the assumption that our plots are approximately normal, we can infer that 95% confidence interval for log(b0*b1) based off the 2.5% and 97.5% quantiles is approximately (1.925, 2.075)
+
+```{r}
+plot_2 = 
+  bootstrap_results_rsquared %>%
+  ggplot(aes(x = r2)) + geom_density(color = "orange")
+
+plot_2
+```
+
+Based on the assumption that our plots are approximately normal, we can infer that the 95% confidence interval for r^2 based off the 2.5% and 97.5% quantiles is approximately (0.8875, 0.9375)
