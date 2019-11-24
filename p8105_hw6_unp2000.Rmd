@@ -106,7 +106,7 @@ weather_df =
 ```
 
 ```{r}
-set.seed(1)
+set.seed(3)
 
 boot_function = function(df) {
   sample_frac(df, size = 0.5, replace = TRUE)
@@ -119,6 +119,34 @@ boot_straps_sample =
     strap_number = 1:5000,
     strap_sample = rerun(5000, boot_function(weather_df))
   )
+```
+## Produce estimates for log(Beta 0*Beta1)
+```{r}
+bootstrap_results = 
+  boot_straps_sample %>% 
+  mutate(
+    models = map(strap_sample, ~lm(tmax ~ tmin, data = .x) ),
+    results = map(models, broom::tidy)) %>% 
+  unnest(cols = c(results)) %>%
+  select(strap_number, term, estimate) %>% 
+  pivot_wider(names_from = term, values_from = estimate) %>%
+  janitor::clean_names() %>%
+  rename(b0 = intercept, b1 = tmin) %>%
+  mutate(ln_b0b1 = log(b0*b1)) %>%
+  select(-b0, -b1)
+```
+
+##Produce estimates for r^2 
+```{r}
+bootstrap_results_rsquared = 
+  boot_straps_sample %>%
+  mutate(
+   models= map(strap_sample, ~lm(tmax~tmin, data = .x)), 
+   results = map(models, broom::glance)) %>%
+  select(-strap_sample, -models) %>%
+  unnest(cols = c(results)) %>%
+  select(strap_number, r.squared) %>%
+  rename(r2 = r.squared)
 ```
 
 
