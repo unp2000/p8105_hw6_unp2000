@@ -132,11 +132,11 @@ bootstrap_results =
   pivot_wider(names_from = term, values_from = estimate) %>%
   janitor::clean_names() %>%
   rename(b0 = intercept, b1 = tmin) %>%
-  mutate(ln_b0b1 = log(b0*b1)) %>%
+  mutate(log_b0b1 = log(b0*b1)) %>%
   select(-b0, -b1)
 ```
 
-##Produce estimates for r^2 
+## Produce estimates for r^2 
 ```{r}
 bootstrap_results_rsquared = 
   boot_straps_sample %>%
@@ -149,4 +149,12 @@ bootstrap_results_rsquared =
   rename(r2 = r.squared)
 ```
 
+## Producing Plots 
+```{r}
+plot_1 = 
+  bootstrap_results %>%
+  ggplot(aes(x = log_b0b1)) + geom_density(color = "blue") 
+
+plot_1
+```
 
