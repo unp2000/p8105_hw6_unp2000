@@ -26,7 +26,7 @@ janitor::clean_names () %>%
 
 ## Creating Initial Regression Model: 
 
-Variables were selected based on a literature search of predictors of low birthweight. Based on this, babysex, gaweeks, momage, mheight, parity, ppbmi, pnumlbw, and smoken were selected as variables to include in the model. 
+Variables were selected based on a literature search of predictors of low birthweight. Based on a study conducted by Marieke Paarlberg et al., 2005, Baby Sex (babysex), Gestational Age in Weeks (gaweeks), Mother's Age at Delivery (momage), Mother's Height (mheight), Parity (parity), Mother's Pre-Pregnancy BMI (ppbmi), Previous Number of Low Birthweight Babies (pnumlbw), and Average Number of Cigarettes Smoked per day During Pregnancy (smoken) were selected as variables to include in the model. 
 
 ```{r}
 bw_model1 = lm(bwt ~ babysex + gaweeks + momage + mheight + parity + ppbmi + pnumlbw + smoken, data = child_data)
@@ -90,7 +90,7 @@ cv_bwt %>%
 cv_bwt
 ```
 
-Based off of the RMSE distribution of the models, I can see that the Model 3 which includes the interaction terms is the best fit for this data. Model 1, my predicted model has a high RMSE value which indicates that it doesn't fit the data appropriately. Model 2 which includes some of the parameters from Model 3 has an RMSE value in the middle which shows that it fits the data better than Model 1 but not as well as Model 3. 
+Based off of the RMSE distribution of the models, I can see that the Model 3 which includes the interaction terms is the best fit for this data. Model 1, my predicted model based on the literature has a high RMSE value which indicates that it doesn't fit the data appropriately. Based off the cross validation prediction error which gives us RMSE values, Model 2 which includes some of the parameters from Model 3 has an RMSE value in the middle which shows that it fits the data better than Model 1 but not as well as Model 3. 
 
 # Problem 2: 
 ```{r}
@@ -160,7 +160,7 @@ plot_1 =
 plot_1
 ```
 
-Based on the plot above, we can see that the distribution of log(b0 * b1) is approximately normal which might be due to the fact that we performed a log transformation to log(b0 * b1).We can infer that 95% confidence interval for log(b0*b1) based off the 2.5% and 97.5% quantiles is approximately (1.925, 2.075)
+Based on the plot above, we can see that the distribution of log(b0 * b1) is approximately normal which might be due to the fact that we performed a log transformation to log(b0 * b1).We can infer that 95% confidence interval for log(b0*b1) based off the 2.5% and 97.5% quantiles is approximately (1.925, 2.075).
 
 ```{r}
 plot_2 = 
@@ -170,4 +170,4 @@ plot_2 =
 plot_2
 ```
 
-Based on the plot above, we can see that the distribution for our r^2 values is slightly left skewed. We can infer that the 95% confidence interval for r^2 based off the 2.5% and 97.5% quantiles is approximately (0.8875, 0.9375)
+Based on the plot above, we can see that the distribution for our r^2 values is slightly left skewed. We can infer that the 95% confidence interval for r^2 based off the 2.5% and 97.5% quantiles is approximately (0.8875, 0.9375).
